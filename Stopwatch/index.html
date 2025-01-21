@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0; padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .timeContainer {
+            font-size: 100px;
+            font-weight: bold;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 25px;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
   <title>Stopwatch</title>
 </head>
 <body>
-  <h1>Stopwatch</h1>
-  <p id="time">0:00</p>
-  <button id="startBtn">Start</button>
-  <button id="stopBtn">Stop</button>
-  <button id="resetBtn">Reset</button>
-
+    <header>  
+        <h1>Stopwatch</h1>
+    </header>
+    <main>
+        <div class="timeContainer">
+            <p id="time">0:00</p>
+        </div>
+        <div class="controls">
+            <button id="startBtn">Start</button>
+            <button id="stopBtn">Stop</button>
+            <button id="resetBtn">Reset</button>
+        </div>
+    </main>
   <script>
     let intervalId; // Hoisting demonstration
     let seconds = 0;
