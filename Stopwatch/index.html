@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stopwatch</title>
+</head>
+<body>
+  <h1>Stopwatch</h1>
+  <p id="time">0:00</p>
+  <button id="startBtn">Start</button>
+  <button id="stopBtn">Stop</button>
+  <button id="resetBtn">Reset</button>
+
+  <script>
+    let intervalId; // Hoisting demonstration
+    let seconds = 0;
+
+    // Closures to manage the time
+    function stopwatchManager() {
+      return {
+        start(callback) {
+          if (!intervalId) {
+            intervalId = setInterval(() => {
+              seconds++;
+              callback(seconds);
+            }, 1000);
+          }
+        },
+        stop() {
+          clearInterval(intervalId);
+          intervalId = null;
+        },
+        reset(callback) {
+          seconds = 0;
+          callback(seconds);
+        }
+      };
+    }
+
+    const manager = stopwatchManager();
+
+    const timeDisplay = document.getElementById('time');
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // Event loop demonstration
+    startBtn.addEventListener('click', () => {
+      manager.start((sec) => {
+        const minutes = Math.floor(sec / 60);
+        const remainingSeconds = sec % 60;
+        timeDisplay.textContent = `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+      });
+    });
+
+    stopBtn.addEventListener('click', () => {
+      manager.stop();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      manager.reset((sec) => {
+        timeDisplay.textContent = `0:00`;
+      });
+    });
+  </script>
+</body>
+</html>
